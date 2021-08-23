@@ -63,9 +63,6 @@ class WordDetectorSpectrogram():
         targets = torch.stack(targets)
         return tensors, targets
 
-    def _exec_callback(self, is_train, ):
-        pass
-
     def _exec(self, epoch, loader, optimizer, batch_callback):
         is_train = loader == self._train_loader
         self._net.train() if is_train else self._net.eval()
@@ -88,9 +85,7 @@ class WordDetectorSpectrogram():
                 correct += prediction.squeeze().eq(target).sum().item()
             batch_callback()
 
-        if is_train:
-            print(f"Train Epoch: {epoch} [{idx * len(data)}/{len(loader.dataset)} ({100. * idx / len(loader):.0f}%)]\tLoss: {loss.item():.6f}")
-        else:
+        if not is_train:
             print(f"\nTest Epoch: {epoch}\tAccuracy: {correct}/{len(loader.dataset)} ({100. * correct / len(loader.dataset):.0f}%)\n")
         batch_callback()
 
