@@ -40,7 +40,7 @@ class WordDetectorSpectrogram():
                 'win_length': round((AudioDataset.get_sample_rate() * 50) / 1000),
                 'mel_scale': 'htk',
             }
-        ).to(self._device)
+        )
         print(f"WordDetector with mel spectrograms ready on device: {self._device}")
 
     def _collate_fn(self, batch):
